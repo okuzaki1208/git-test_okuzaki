@@ -1,0 +1,48 @@
+body {
+    background-image: url(../Images/bg.jpg);
+    background-size: cover;
+}
+
+h1 {
+    text-align: center;
+}
+
+main {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.76);
+}
+
+#profile {
+    margin-top: 10%;
+}
+
+#contact {
+    margin-top: 10%;
+}
+
+#contact-timeline {
+    margin-top: 10%;
+}
+
+/* 入力フィールドの背景色を設定 */
+input[type="text"], input[type="email"], textarea {
+    width: 50%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff; /* デフォルトの背景色を白色に設定 */
+}
+
+/* 入力フィールドがバリデーションに合格した場合の背景色 */
+input:valid, textarea:valid {
+   background-color: lightgreen;
+}
+
+/* 入力フィールドがバリデーションに不合格の場合の背景色 */
+input:invalid, textarea:invalid {
+    background-color: #ffcccc;
+}
