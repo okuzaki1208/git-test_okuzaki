@@ -18,11 +18,19 @@
     <p>趣味：ゲーム・楽器・釣り・カラオケ・パソコンいじり</p>
     <p>一言：よろしくお願いします。</p>
 </section>
-
+ <section>
+        <h2>プロフィール・自己紹介</h2>
+        <img src="IMAGES/IMG_2248.JPG" alt="プロフィール画像" style="width: 100px; height: 100px;">
+     　 <p>名前：亀ヶ澤泰子</p>
+    　  <p>趣味：お菓子・料理食べることと作ること・</p>
+        <p>一言：情報交換して、お友達になりませんか？</p>
+    </section>
 <!-- お問い合わせフォームセクション -->
 <section id="contact">
     <h2>お問い合わせフォーム</h2>
     <form method="post" action="submit_contact.php" onsubmit="return validateForm()">
+        <label for="to">宛先:</label>
+　　　 　<input type="text" id="to" name="to">
         <label for="name">名前(最大10文字)</label><br>
         <input type="text" id="name" name="name" required maxlength="10"><br><br>
         
