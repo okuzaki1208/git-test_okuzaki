@@ -29,6 +29,7 @@ CREATE TABLE `comments` (
   `name` varchar(10) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `message` text DEFAULT NULL,
+  `subject`  VARCHAR(255) DEFAULT NULL,
   `date_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)

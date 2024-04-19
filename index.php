@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Git・PHP・SQL　テスト課題</title>
+    <title>Git・PHP・SQL テスト課題</title>
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 <body>
 
 <main>
 
-    <h1>Git・PHP・SQL　テスト課題</h1>
+    <h1>Git・PHP・SQL テスト課題</h1>
 
 <!-- プロフィールセクション -->
 <section id="profile">
@@ -30,7 +30,7 @@
     <h2>お問い合わせフォーム</h2>
     <form method="post" action="submit_contact.php" onsubmit="return validateForm()">
         <label for="to">宛先:</label>
-　　　 　<input type="text" id="to" name="to">
+        <input type="text" id="to" name="to">
         <label for="name">名前(最大10文字)</label><br>
         <input type="text" id="name" name="name" required maxlength="10"><br><br>
         
@@ -72,7 +72,7 @@
 
             // 結果を取得して表示
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']}</li><br>";
+                echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']} {$row['subject']}</li><br>";
             }
 
         } catch(PDOException $e) {
