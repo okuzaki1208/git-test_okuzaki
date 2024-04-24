@@ -29,6 +29,7 @@
 <section id="contact">
     <h2>お問い合わせフォーム</h2>
     <form method="post" action="submit_contact.php" onsubmit="return validateForm()">
+
         <label for="subject">宛先:</label><br>
         <input type="text" id="subject" name="subject"required maxlength="255"><br><br>
 
@@ -57,37 +58,30 @@
         $password = ''; // データベースパスワード
 
         try {
-            // データベースへの接続
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            // エラーモードを例外モードに設定
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch(PDOException $e) {
+    // データベースへの接続
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    // エラーモードを例外モードに設定
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // 本日の日付を取得
             $today = date("Y-m-d");
            
 
 
-            // SQL文を準備
-           $stmt = $pdo->prepare("SELECT name, email, message, subject FROM comments");
-           // プレースホルダーに値をバインド
-           $stmt->bindParam(':name', $name);
-           $stmt->bindParam(':email', $email);
-           $stmt->bindParam(':message', $message);
-           $stmt->bindParam(':subject', $subject);
-           $stmt->bindParam(':date_time', $date_time);
-          // SQL文を実行
-           $stmt->execute();
+           // SQL文を準備
+    $stmt = $pdo->prepare("SELECT name, email, message, subject FROM comments");
+    // SQL文を実行
+    $stmt->execute();
+
            
 
             // 結果を取得して表示
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']} {$row['subject']}</li><br>";
-            }
-
-        } catch(PDOException $e) {
-            // エラーメッセージを表示
-            echo "エラー: " . $e->getMessage();
-        }
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']} {$row['subject']}</li><br>";
+    }
+} catch(PDOException $e) {
+    // エラーメッセージを表示
+    echo "エラー: " . $e->getMessage();
+}
         ?>
     </ul>
 </section>

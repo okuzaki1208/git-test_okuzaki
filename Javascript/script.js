@@ -1,6 +1,6 @@
 function validateForm() {
     // 宛先の入力値を取得
-    let to = document.getElementById("to").value;
+    let to = document.getElementById("subject").value;
     // 名前の入力値を取得
     let name = document.getElementById("name").value;
     // メールアドレスの入力値を取得
@@ -9,7 +9,7 @@ function validateForm() {
     let message = document.getElementById("message").value;
 
     // 宛先が入力されているか確認
-    if (to === "") {
+    if (subject === "") {
         alert("宛先を入力してください");
         return false;
     }
