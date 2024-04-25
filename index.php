@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Git・PHP・SQL　テスト課題</title>
+    <title>Git・PHP・SQL テスト課題</title>
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 <body>
 
 <main>
 
-    <h1>Git・PHP・SQL　テスト課題</h1>
+    <h1>Git・PHP・SQL テスト課題</h1>
 
 <!-- プロフィールセクション -->
 <section id="profile">
@@ -21,16 +21,18 @@
  <section>
         <h2>プロフィール・自己紹介</h2>
         <img src="IMAGES/IMG_2248.JPG" alt="プロフィール画像" style="width: 100px; height: 100px;">
-     　 <p>名前：亀ヶ澤泰子</p>
-    　  <p>趣味：お菓子・料理食べることと作ること・</p>
+       <p>名前：亀ヶ澤泰子</p>
+       <p>趣味：お菓子・料理食べることと作ること</p>
         <p>一言：情報交換して、お友達になりませんか？</p>
     </section>
 <!-- お問い合わせフォームセクション -->
 <section id="contact">
     <h2>お問い合わせフォーム</h2>
     <form method="post" action="submit_contact.php" onsubmit="return validateForm()">
-        <label for="to">宛先:</label>
-　　　 　<input type="text" id="to" name="to">
+
+        <label for="subject">宛先:</label><br>
+        <input type="text" id="subject" name="subject"required maxlength="255"><br><br>
+
         <label for="name">名前(最大10文字)</label><br>
         <input type="text" id="name" name="name" required maxlength="10"><br><br>
         
@@ -56,29 +58,30 @@
         $password = ''; // データベースパスワード
 
         try {
-            // データベースへの接続
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            // エラーモードを例外モードに設定
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+    // データベースへの接続
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    // エラーモードを例外モードに設定
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             // 本日の日付を取得
             $today = date("Y-m-d");
+           
 
-            // SQL文を準備
-            $stmt = $pdo->prepare("SELECT * FROM comments WHERE DATE(date_time) = :today ORDER BY id DESC LIMIT 10");
-            $stmt->bindParam(':today', $today);
-            // SQL文を実行
-            $stmt->execute();
+
+           // SQL文を準備
+    $stmt = $pdo->prepare("SELECT name, email, message, subject FROM comments");
+    // SQL文を実行
+    $stmt->execute();
+
+           
 
             // 結果を取得して表示
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']}</li><br>";
-            }
-
-        } catch(PDOException $e) {
-            // エラーメッセージを表示
-            echo "エラー: " . $e->getMessage();
-        }
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']} {$row['subject']}</li><br>";
+    }
+   } catch(PDOException $e) {
+    // エラーメッセージを表示
+    echo "エラー: " . $e->getMessage();
+   }
         ?>
     </ul>
 </section>

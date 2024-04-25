@@ -29,12 +29,15 @@ CREATE TABLE `comments` (
   `name` varchar(10) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `message` text DEFAULT NULL,
+  `subject`  VARCHAR(255) DEFAULT NULL,
   `date_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE `comments`
+ADD COLUMN `subject` VARCHAR(255);
 --
 -- Dumping data for table `comments`
 --
