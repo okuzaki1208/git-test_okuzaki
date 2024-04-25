@@ -78,10 +78,10 @@
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']} {$row['subject']}</li><br>";
     }
-} catch(PDOException $e) {
+   } catch(PDOException $e) {
     // エラーメッセージを表示
     echo "エラー: " . $e->getMessage();
-}
+   }
         ?>
     </ul>
 </section>
