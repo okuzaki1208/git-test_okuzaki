@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Git・PHP・SQL　テスト課題</title>
+    <title>20240516テスト課題</title>
     <link rel="stylesheet" type="text/css" href="./CSS/style.css">
 </head>
 <body>
@@ -9,6 +9,7 @@
 <main>
 
     <h1>Git・PHP・SQL　テスト課題</h1>
+    <h1>(改・20240516 JSON・AJAXテスト課題)</h1>
 
 <!-- プロフィールセクション -->
 <section id="profile">
@@ -26,7 +27,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // データベース接続情報
         $host = 'localhost';
-        $dbname = 'git-test'; // データベース名
+        $dbname = 'json_test_okuzaki'; // データベース名
         $username = 'root'; // データベースユーザー名
         $password = ''; // データベースパスワード
 
@@ -72,49 +73,19 @@
         <label for="message">お問い合わせ内容(必須)</label><br>
         <textarea id="message" name="message" required></textarea><br><br>
 
-        <input type="submit" value="送信" onclick="return confirm('本当に送信しますか？')" style="background-color: #fff; color: #000;">
+        <input type="submit" value="送信" onclick="return confirm('本当に送信しますか？')" class="graphical-submit-button">
     </form>
 </section>
 
 <!-- 今日もらったコメントセクション -->
-<section id="contact-timeline">
+<section id="contact-timeline" style="display: flex;">
     <h2>今日もらったコメント</h2>
-    <ul>
-        <?php
-        // データベース接続情報
-        $host = 'localhost';
-        $dbname = 'git-test'; // データベース名
-        $username = 'root'; // データベースユーザー名
-        $password = ''; // データベースパスワード
-
-        try {
-            // データベースへの接続
-            $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-            // エラーモードを例外モードに設定
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            // 本日の日付を取得
-            $today = date("Y-m-d");
-
-            // SQL文を準備
-            $stmt = $pdo->prepare("SELECT * FROM comments WHERE DATE(date_time) = :today ORDER BY id DESC LIMIT 10");
-            $stmt->bindParam(':today', $today);
-            // SQL文を実行
-            $stmt->execute();
-
-            // 結果を取得して表示
-            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<li><strong>{$row['name']}</strong> {$row['email']}<br>{$row['message']}</li><br>";
-            }
-
-        } catch (PDOException $e) {
-            // エラーメッセージを表示
-            echo "エラー: " . $e->getMessage();
-        }
-        ?>
-    </ul>
+    <input type="button" value="最新コメント10件を読み込む" onclick="loadComments()" class="graphical-button" style="margin-left:100px;">
 </section>
+
+<div id="comment-table"></div>
 </main>
 <script src="./Javascript/script.js"></script>
+</script>
 </body>
 </html>
